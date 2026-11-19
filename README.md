@@ -1,6 +1,6 @@
-## 📊 Интерактивные дашборды
+## 📊 Интерактивные дашборды DataLens
 
 Вы можете ознакомиться с моими проектами по ссылкам ниже:
 
-* [🚀 Дашборд 1: Продажи и аналитика](https://https://darianedviga.github.io//Portfolio/dashboard1.html)
-* [📈 Дашборд 2: Маркетинг и воронка](https://datalens.yandex/v8e7bn4be20qf?_share_link=public)
+* [2026, Продуктовые и маркетинговые метрики](https://datalens.yandex/hvkzxbmjwt3q1?_share_link=public)
+* [2026, Статистика перелётов](https://datalens.yandex/v8e7bn4be20qf?_share_link=public)
