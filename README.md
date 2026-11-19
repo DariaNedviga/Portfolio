@@ -1,1 +1,6 @@
-# **2026, Продуктовые и маркетинговые метрики [Дашборд DataLens](https://darianedviga.github.io/Portfolio/)**
+## 📊 Интерактивные дашборды
+
+Вы можете ознакомиться с моими проектами по ссылкам ниже:
+
+* [🚀 Дашборд 1: Продажи и аналитика](https://https://darianedviga.github.io//Portfolio/dashboard1.html)
+* [📈 Дашборд 2: Маркетинг и воронка](https://https://darianedviga.github.io//Portfolio/dashboard2.html)
