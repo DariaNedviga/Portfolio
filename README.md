@@ -1,5 +1,8 @@
 # Проекты, выполненные во время обучения в РУДН и Школе 21:
 
+# Оглавление
+- [Введение](#intro)
+- 
 ## Интерактивные дашборды DataLens
 
 ### 1. 2026, Продуктовые и маркетинговые метрики
@@ -33,12 +36,12 @@
   - Оформление графиков, добавление пояснений и формулирование выводов по результатам анализа.
 -------
 ## SQL, Python и библиотеки
-
+<a name="intro"></a>
 ### 1. 2025, Автоматизированная подготовка словарей
 Сквозной конвейер Python-структура → схема SQLite → загрузка и CRUD → обратная генерация текста словаря → визуализация параметров, где каждая ступень опирается на предыдущую.
 
 **Стэк:** Python, SQL(SQLite), mathplotlib
-- [Навыки SQL](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/Archaeological_sql_skills.md)
+- [Навыки SQL и Python](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/Archaeological_sql_skills.md)
 - [Все SQL запросы](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/arch_queries.md)
 - [Визуализация](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/Arch_visuals.md)
 - [Весь код проекта (с сокращённым словарём)](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B5%D0%B9.ipynb)
@@ -48,6 +51,21 @@
   * Программа загрузки данных из Python-структуры в SQLite, а также вывода и редактирования элементов статей (CRUD-операции)
   * Программное воссоздание текста словаря из БД
   * Визуализация параметров словаря (matplotlib)
+-------
+### 2. 2024, Разработка информационной системы банка
+
+Проектирование базы данных банковской системы и разработка консольного приложения: анализ предметной области → построение ER-модели → проектирование реляционной структуры SQLite → реализация взаимодействия с БД на Python → выполнение операций по добавлению, просмотру, изменению и удалению данных о клиентах и банковских продуктах.
+
+**Стек:** Python, SQL (SQLite), tabulate
+- [Навыки SQL и Python](https://github.com/DariaNedviga/Portfolio/blob/main/Bank/Bank_skills.md)
+- [Все SQL запросы]()
+- [ER диаграмма и схема БД](https://github.com/DariaNedviga/Portfolio/blob/main/Bank/Visualization.md)
+- [Весь код проекта](https://github.com/DariaNedviga/Portfolio/blob/main/Bank/Bank.py)
+- **Задачи:**
+  - Проектирование структуры информационной системы банка и реляционной базы данных SQLite
+  - Разработка консольного приложения на Python с меню для взаимодействия с таблицами базы данных.
+  - Реализация операций CRUD.
+  - Использование SQL-запросов с `JOIN`, `ORDER BY`, `LIMIT`, `BETWEEN` для получения и фильтрации связанных данных.
 
 -------
 ### 2026, Планирование проекта «Семейный бюджет»
