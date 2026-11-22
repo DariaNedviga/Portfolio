@@ -1,6 +1,6 @@
 ## SQL: навыки
 
-Запросы используются в трёх модулях: парсер словаря, CRUD-меню, модуль статистики. Полный список в [`arch_queries.md`](https://github.com/DariaNedviga/Portfolio/blob/main/arch_queries.md), здесь ключевые примеры по навыкам.
+Запросы используются в трёх модулях: парсер словаря, CRUD-меню, модуль статистики. [Посмотреть полный список запросов](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/arch_queries.md), здесь ключевые примеры по навыкам.
 
 ### Схема данных
 
