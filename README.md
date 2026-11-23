@@ -10,7 +10,7 @@
 ### 1. 2025, Автоматизированная подготовка словарей
 Сквозной конвейер Python-структура → схема SQLite → загрузка и CRUD → обратная генерация текста словаря → визуализация параметров, где каждая ступень опирается на предыдущую.
 
-**Стэк:** Python, SQL(SQLite), mathplotlib
+**Стек:** Python, SQL(SQLite), matplotlib
 - [Навыки SQL и Python](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/Archaeological_sql_skills.md)
 - [Все SQL запросы](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/arch_queries.md)
 - [Визуализация](https://github.com/DariaNedviga/Portfolio/blob/main/Archaeological_dictionary/Arch_visuals.md)
