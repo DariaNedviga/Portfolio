@@ -5,51 +5,8 @@
 - Обработка пользовательского ввода и базовая обработка ошибок.
 - Форматирование и представление табличных данных с помощью библиотеки `tabulate`.
 
+-------
 ## Навыки SQL
-
-- **Добавление данных (`INSERT`)** — добавление клиента с привязкой к менеджеру и банку:
-  ```sql
-  INSERT INTO client VALUES (
-      NULL,
-      (SELECT id FROM manager WHERE last_name = "{manager}"),
-      "{name}", "{surname}", "{patronymic}",
-      "{age}", "{phone_number}",
-      (SELECT id FROM bank WHERE name = "{bank}")
-  );
-  ```
-
-- **Выборка и объединение таблиц (`SELECT`, `JOIN`)** — получение списка клиентов с данными об их банках и менеджерах:
-  ```sql
-  SELECT client.last_name, client.first_name,
-         client.phone_number, bank.name AS bank_name
-  FROM client
-  JOIN bank ON bank.id = client.bank_id
-  JOIN manager ON manager.id = client.manager_id
-  ORDER BY client.last_name;
-  ```
-
-- **Фильтрация (`WHERE`, `BETWEEN`)** — поиск банковских карт по диапазону лимита снятия:
-  ```sql
-  WHERE cash_out_limit BETWEEN {between_1} AND {between_2};
-  ```
-
-- **Сортировка и ограничение выборки (`ORDER BY`, `LIMIT`)** — сортировка клиентов и ограничение количества выводимых вкладов:
-  ```sql
-  SELECT * FROM investment LIMIT {limit};
-  ```
-
-- **Удаление данных (`DELETE`)** — удаление вклада по идентификатору:
-  ```sql
-  DELETE FROM investment WHERE id == {id};
-  ```
-
-- Проектирование реляционной базы данных, работа с первичными и внешними ключами, связями `One-to-Many` и `Many-to-Many`.
-![db](https://github.com/DariaNedviga/Portfolio/blob/main/Bank/%D0%A1%D1%85%D0%B5%D0%BC%D0%B0%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85.png?raw=true)
-- Работа с SQLite и выполнение SQL-запросов из Python.
-
-
-
-## SQL: навыки
 
 SQL используется для работы с базой данных банка «Триумф»: управление клиентами, вкладами и банковскими картами.
 
