@@ -9,7 +9,7 @@
 
 ## Навыки SQL
 
-Запросы используются в CRUD-меню. [Полный список запросов](https://github.com/DariaNedviga/Portfolio/blob/main/Bank/Bank_queries.md).
+Запросы используются в CRUD-меню. [Посмотреть полный список запросов](https://github.com/DariaNedviga/Portfolio/blob/main/Bank/Bank_queries.md).
 
 ### Схема данных (основные таблицы)
 
