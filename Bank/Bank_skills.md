@@ -6,49 +6,29 @@
 - Форматирование и представление табличных данных с помощью библиотеки `tabulate`.
 
 -------
+
 ## Навыки SQL
 
-SQL используется для работы с базой данных банка «Триумф»: управление клиентами, вкладами и банковскими картами.
+Запросы используются в CRUD-меню. [Полный список запросов](https://github.com/DariaNedviga/Portfolio/blob/main/Bank/Bank_queries.md).
 
-### Схема данных
+### Схема данных (основные таблицы)
 
-| Таблица | Поля |
+| Таблица | Ключевые поля |
 |---|---|
-| `bank` | id, name, address, number_of_employess |
-| `manager` | id, first_name, last_name, patronymic, phone, bank_id |
-| `client` | id, manager_id, first_name, last_name, patronymic, age, phone_number, bank_id |
-| `passport_data` | id, first_name, last_name, patronymic, gender, date_of_birth, place_of_birth, serial_number, address, department_code, issued_by, date_of_issue, client_id |
-| `investment` | id, client_id, name, interest_rate, cash_out_possibility, maturity |
-| `loan` | id, client_id, name, interest_expense, monthly_payment, total_amount, remainder, maturity_date |
-| `bank_card` | id, type, service_price, cash_out_limit, accumulation_by_balance, contactless_payments, miles_accumulation, swift |
-| `card_client` | card_id, client_id |
+| `client` | `id`, `manager_id`, `first_name`, `last_name`, `patronymic`, `age`, `phone_number`, `bank_id` |
+| `investment` | `id`, `client_id`, `name`, `interest_rate`, `cash_out_possibility`, `maturity` |
+| `bank_card` | `id`, `type`, `service_price`, `cash_out_limit`, `accumulation_by_balance`, `contactless_payments`, `miles_accumulation`, `swift` |
+| `card_client` | `card_id`, `client_id` |
 
 ---
 
-### Создание реляционной структуры и связей (`PRIMARY KEY`, `FOREIGN KEY`)
+### Вставка с подзапросами для внешних ключей (`INSERT` + `SELECT`)
+
+Позволяет получать записи по бизнес-значению (фамилия менеджера, название банка).
 
 ```sql
-CREATE TABLE "client" (
-    "id" INTEGER NOT NULL UNIQUE,
-    "manager_id" INTEGER,
-    "first_name" TEXT,
-    "last_name" TEXT,
-    "patronymic" TEXT,
-    "age" INTEGER,
-    "phone_number" INTEGER,
-    "bank_id" INTEGER,
-    PRIMARY KEY("id" AUTOINCREMENT),
-    FOREIGN KEY("manager_id") REFERENCES "manager"("id"),
-    FOREIGN KEY("bank_id") REFERENCES "bank"("id")
-);
-```
-
----
-
-### Добавление данных с подзапросами (`INSERT`, `SELECT`)
-
-```sql
-INSERT INTO client VALUES (
+INSERT INTO client
+VALUES (
     NULL,
     (SELECT id FROM manager WHERE last_name = "{manager}"),
     "{name}", "{surname}", "{patronymic}",
@@ -59,28 +39,88 @@ INSERT INTO client VALUES (
 
 ---
 
-### Объединение таблиц (`JOIN`)
+### Выборка с `JOIN` и сортировкой (`SELECT` + `JOIN` + `ORDER BY`)
 
-Получение списка клиентов с названиями банков и фамилиями менеджеров:
+Демонстрирует соединение трёх таблиц и динамическую сортировку по имени клиента.
 
 ```sql
-SELECT client.last_name, client.first_name,
-       client.phone_number,
-       bank.name AS bank_name,
-       manager.last_name AS manager
+SELECT
+    client.last_name,
+    client.first_name,
+    client.phone_number,
+    bank.name AS bank_name,
+    manager.last_name AS manager
 FROM client
 JOIN bank ON bank.id = client.bank_id
 JOIN manager ON manager.id = client.manager_id
-ORDER BY client.last_name;
+ORDER BY client.last_name {order};
 ```
 
 ---
 
-### Фильтрация по диапазону (`WHERE`, `BETWEEN`)
+### Удаление с подзапросом (`DELETE` + `SELECT` в `WHERE`)
+
+Удаление записи по составному бизнес-ключу (имя + фамилия) без знания `id`.
 
 ```sql
-SELECT bank_card.id, bank_card.type,
-       bank_card.cash_out_limit
+DELETE FROM client
+WHERE id = (
+    SELECT id FROM client
+    WHERE first_name = "{name}" AND last_name = "{surname}"
+);
+```
+
+---
+
+### Точечное обновление поля (`UPDATE` + `WHERE id = ...`)
+
+Показывает изменение конкретного атрибута сущности с предварительным чтением старого значения (для информативного вывода).
+
+```sql
+UPDATE client
+SET last_name = "{surname}"
+WHERE id = {id};
+```
+
+
+---
+
+### Выборка с ограничением количества строк (`LIMIT`)
+
+Используется для постраничного вывода или ограничения выборки при просмотре списка вкладов.
+
+```sql
+SELECT
+    investment.id,
+    investment.name,
+    investment.interest_rate,
+    investment.cash_out_possibility,
+    investment.maturity,
+    client.first_name AS client_name,
+    client.last_name AS client_surname
+FROM investment
+JOIN client ON client.id = investment.client_id
+LIMIT {limit};
+```
+
+---
+
+### Выборка с диапазоном (`BETWEEN`)
+
+Фильтрация банковских карт по лимиту снятия наличных в заданном интервале.
+
+```sql
+SELECT
+    bank_card.id,
+    bank_card.type,
+    bank_card.service_price,
+    bank_card.cash_out_limit,
+    bank_card.accumulation_by_balance,
+    bank_card.contactless_payments,
+    bank_card.miles_accumulation,
+    bank_card.swift,
+    client.last_name AS client_surname,
+    client.first_name AS client_name
 FROM card_client
 JOIN bank_card ON card_client.card_id = bank_card.id
 JOIN client ON card_client.client_id = client.id
@@ -89,26 +129,25 @@ WHERE cash_out_limit BETWEEN {between_1} AND {between_2};
 
 ---
 
-### Ограничение выборки (`LIMIT`)
+### Простое удаление по `id` (`DELETE` + `WHERE id = ...`)
+
+Базовый вариант удаления сущности, когда первичный ключ известен.
 
 ```sql
-SELECT investment.id, investment.name,
-       investment.interest_rate,
-       client.first_name AS client_name
-FROM investment
-JOIN client ON client.id = investment.client_id
-LIMIT {limit};
+DELETE FROM investment WHERE id = {id};
 ```
 
 ---
 
-### Точечное обновление и удаление по `id` (`UPDATE`, `DELETE`)
+### Вставка с явным списком значений (`INSERT` + `VALUES`)
+
+Используется, когда все значения известны и не требуют подзапросов (например, добавление банковской карты).
 
 ```sql
-UPDATE client
-SET last_name = "{surname}"
-WHERE id = {id};
-
-DELETE FROM investment
-WHERE id == {id};
+INSERT INTO bank_card
+VALUES (
+    NULL, "{type}", "{price}", "{limit}", "{acc}",
+    "{contact}", "{mile}", "{swift}"
+);
 ```
+
